@@ -12,7 +12,7 @@ const Gallery = () => {
 
   return (
     <Container className="py-5">
-      <h1 className="text-center mb-4 gradient-primary">Galería de Publicaciones</h1>
+      <h1 className="text-center mb-4">Galería de Publicaciones</h1>
 
       {/* Filtros */}
       <Row className="mb-4">
