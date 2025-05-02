@@ -7,11 +7,11 @@ const HeroSection = () => {
       <Container>
         <Row className="align-items-center">
           <Col md={6} className="text-center text-md-start">
-            <h1 className="display-4 fw-bold mb-4">
+            <h1 className="display-4 fw-bold mb-4 gradient-primary">
               Dale una segunda vida a tu ropa
             </h1>
             <p className="lead mb-4">
-              Compra y vende ropa de segunda mano de manera fácil y segura
+            "Moda circular con historias por contar"
             </p>
             <Button 
               as={Link} 
