@@ -6,7 +6,7 @@ const CreateProduct = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = (data) => {
-    // Aquí irá la lógica para crear productos cuando conectemos con el backend
+    // Aquí colocaremos la lógica para conectar con el backend y enviar los datos del producto
     console.log(data);
     toast.success('¡Producto publicado exitosamente!');
   };
@@ -129,7 +129,7 @@ const CreateProduct = () => {
                 {errors.images?.message}
               </Form.Control.Feedback>
               <Form.Text className="text-muted">
-                Puedes subir hasta 5 imágenes. La primera será la imagen principal.
+                Puedes subir hasta 3 imágenes. La primera será la imagen principal.
               </Form.Text>
             </Form.Group>
 
