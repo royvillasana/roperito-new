@@ -6,6 +6,8 @@ import CustomInput from "../../components/CustomInput/CustomInput";
 import { BiUser } from "react-icons/bi";
 import { MdEmail, MdPassword } from "react-icons/md";
 import { GiConfirmed } from "react-icons/gi";
+import { PiPhone } from "react-icons/pi";
+import CustomButton from "../../components/CustomButton/CustomButton";
 
 const Register = () => {
   const {
@@ -59,6 +61,21 @@ const Register = () => {
             />
 
             <CustomInput
+              label={"Telefono"}
+              type={"phone"}
+              name={"phone"}
+              placeholder="+56912345678"
+              required={"El número de teléfono es requerido"}
+              minLength={{
+                value: 9,
+                message: "El número de teléfono debe tener al menos 9 dígitos",
+              }}
+              register={register}
+              errors={errors}
+              icon={<PiPhone />}
+            />
+
+            <CustomInput
               label={"Contraseña"}
               type={"password"}
               name={"password"}
@@ -101,9 +118,12 @@ const Register = () => {
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Button variant="primary" type="submit" className="w-100 mb-3">
-              Registrarse
-            </Button>
+            <CustomButton
+              variant="primary"
+              title={"Registrarse"}
+              type={"submit"}
+              style="w-100 mb-3"
+            />
 
             <div className="text-center">
               ¿Ya tienes una cuenta? <Link to="/login">Inicia sesión</Link>

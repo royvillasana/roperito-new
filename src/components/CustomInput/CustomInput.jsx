@@ -13,31 +13,39 @@ export default function CustomInput({
   validate = null,
   register,
   errors,
-  icon = null, // <- Nuevo prop
+  icon = null,
 }) {
   return (
-    <Form.Group className="custom-input-group">
+    <Form.Group className="mb-4">
       <Form.Label className="custom-input-label">{label}</Form.Label>
+
       <div
         className={`custom-input-wrapper ${errors[name] ? "has-error" : ""}`}
       >
         {icon && <span className="custom-input-icon">{icon}</span>}
-        <Form.Control
-          type={type}
-          {...register(name, {
-            required,
-            pattern,
-            minLength,
-            validate,
-          })}
-          isInvalid={!!errors[name]}
-          className="custom-input"
-          placeholder={placeholder}
-        />
+        <div style={{ width: "100%" }}>
+          <Form.Control
+            type={type}
+            {...register(name, {
+              required:
+                typeof required === "string"
+                  ? { value: true, message: required }
+                  : required,
+              pattern,
+              minLength,
+              validate,
+            })}
+            isInvalid={!!errors[name]}
+            className="custom-input"
+            placeholder={placeholder}
+          />
+          <Form.Control.Feedback type="invalid" className="custom-feedback">
+            {errors[name]?.message}
+          </Form.Control.Feedback>
+        </div>
       </div>
-      <Form.Control.Feedback type="invalid" className="custom-feedback">
-        {errors[name]?.message}
-      </Form.Control.Feedback>
     </Form.Group>
   );
 }
+
+//

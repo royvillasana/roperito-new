@@ -1,6 +1,6 @@
 import React from "react";
 import { ButtonGroup, Dropdown } from "react-bootstrap";
-import CustomIconButton from "../CustomButton/CustomIconButton";
+import CustomButton from "../CustomButton/CustomButton";
 
 export default function Desplegable({ product }) {
   const handleStatusChange = (status) => {
@@ -9,7 +9,7 @@ export default function Desplegable({ product }) {
 
   return (
     <Dropdown as={ButtonGroup}>
-      <CustomIconButton title={product.status || "Estado"} />
+      <CustomButton title={product.status || "Estado"} />
       <Dropdown.Toggle
         split
         variant="light"

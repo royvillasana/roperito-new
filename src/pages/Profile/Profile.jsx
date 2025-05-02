@@ -5,7 +5,6 @@ import ProductCard from "../../components/ProductCard";
 import { useProducts } from "../../context/ProductContext";
 import CustomAvatar from "../../components/CustomAvatar/CustomAvatar";
 import "./Profile.css";
-import CustomIconButton from "../../components/CustomButton/CustomIconButton";
 import { BiHeart, BiLogOut } from "react-icons/bi";
 import { CiFolderOn } from "react-icons/ci";
 import CustomButton from "../../components/CustomButton/CustomButton";
@@ -27,9 +26,9 @@ const Profile = () => {
             <CustomAvatar />
             <div className="d-flex flex-column align-items-center gap-3">
               <div className="text-muted small">
-                {user?.name || "test@example.com"}
+                {user?.email || "test@example.com"}
               </div>
-              <CustomIconButton title={"Cerrar Sesión"} icon={<BiLogOut />} />
+              <CustomButton title={"Cerrar Sesión"} icon={<BiLogOut />} />
             </div>
           </Card.Body>
         </Card>
@@ -53,23 +52,23 @@ const Profile = () => {
               </Nav>
             </Card.Header>
             <div className="div-publish">
-              <CustomIconButton title={"Crear publicación"} icon={<PiPlus />} />
+              <CustomButton title={"Crear publicación"} icon={<PiPlus />} />
             </div>
 
             <Card.Body>
               <Tab.Content>
                 <Tab.Pane eventKey="publications">
                   <Row xs={1} md={2} className="g-4">
-                    {userProducts.map((product) => (
+                    {user.products.map((product) => (
                       <Col key={product.id}>
-                        <ProductCard product={product} />
+                        <ProductCard product={product} myProducts />
                       </Col>
                     ))}
                   </Row>
                 </Tab.Pane>
                 <Tab.Pane eventKey="favorites">
                   <Row xs={1} md={2} className="g-4">
-                    {favorites.map((product) => (
+                    {user.favorites.map((product) => (
                       <Col key={product.id}>
                         <ProductCard product={product} />
                       </Col>

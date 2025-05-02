@@ -1,11 +1,12 @@
 import { Container, Form, Button, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../context/AuthContext";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import { MdEmail, MdPassword } from "react-icons/md";
 import CustomButton from "../../components/CustomButton/CustomButton";
+import { userProfile } from "../../config/data";
 
 const Login = () => {
   const {
@@ -15,13 +16,21 @@ const Login = () => {
   } = useForm();
 
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
+    const foundUser = userProfile.find((user) => user.email === data.email);
     // Aquí irá la lógica de login cuando conectemos con el backend
-    console.log(data);
-    // Simulamos un login exitoso
-    login({ name: "Usuario Demo", email: data.email }, "token-demo");
-    toast.success("¡Bienvenido de vuelta!");
+
+    if (data.email === "a@gmail.com" && data.password === "123456") {
+      // Simulamos un login exitoso
+      login(foundUser, "token-demo");
+      toast.success("¡Bienvenido de vuelta!");
+      navigate("/profile");
+    } else {
+      // Simulamos un login fallido
+      toast.error("Email o contraseña incorrectos");
+    }
   };
 
   return (
@@ -57,9 +66,10 @@ const Login = () => {
             />
 
             <CustomButton
+              variant="primary"
               title={"Iniciar Sesión"}
               type={"submit"}
-              className="w-100 mb-3"
+              style="w-100 mb-3"
             />
 
             <div className="text-center mb-3">

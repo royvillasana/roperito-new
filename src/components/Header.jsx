@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { FaUser } from "react-icons/fa";
 import CustomButton from "./CustomButton/CustomButton";
+import { BiLogOut } from "react-icons/bi";
 
 const Header = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -46,13 +47,13 @@ const Header = () => {
                   <FaUser className="me-2" />
                   Mi Perfil
                 </Nav.Link>
-                <Button
+
+                <CustomButton
                   variant="outline-primary"
+                  title={"Cerrar sesión"}
+                  style="ms-2"
                   onClick={handleLogout}
-                  className="ms-2"
-                >
-                  Cerrar sesión
-                </Button>
+                />
               </>
             ) : (
               <>
@@ -61,9 +62,10 @@ const Header = () => {
                 </Nav.Link>
 
                 <CustomButton
+                  variant="primary"
                   title={"Registrarse"}
                   to={"/register"}
-                  className="ms-2"
+                  style="ms-2"
                 />
               </>
             )}

@@ -4,7 +4,7 @@ import { FaEdit, FaStar, FaUser } from "react-icons/fa";
 import "./CustomAvatar.css";
 import { Button } from "react-bootstrap";
 import { PiPhone } from "react-icons/pi";
-import CustomIconButton from "../CustomButton/CustomIconButton";
+import CustomButton from "../CustomButton/CustomButton";
 
 export default function CustomAvatar() {
   const { user } = useAuth();
@@ -23,10 +23,10 @@ export default function CustomAvatar() {
       <div className="fono">
         <div className="d-flex gap-2 align-items-center">
           <PiPhone />
-          <p>{user?.fono || "+5699999999"}</p>
+          <p>{user?.phone || "+5699999999"}</p>
         </div>
 
-        <CustomIconButton title={"Editar perfil"} icon={<FaEdit />} />
+        <CustomButton title={"Editar perfil"} icon={<FaEdit />} />
       </div>
     </div>
   );

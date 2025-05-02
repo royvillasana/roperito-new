@@ -1,15 +1,12 @@
 import { Card, Button, Dropdown, ButtonGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { FaEdit, FaTrash, FaStar } from "react-icons/fa";
-import { useProducts } from "../context/ProductContext";
-import { useAuth } from "../context/AuthContext";
+import { FaEdit, FaTrash, FaStar, FaHeart, FaRegHeart } from "react-icons/fa";
 import { defaultImages } from "../config/images";
-import CustomIconButton from "./CustomButton/CustomIconButton";
 import Desplegable from "./Desplegable/Desplegable";
+import FavoriteButton from "./CustomButton/FavoriteButton/FavoriteButton";
+import CustomButton from "./CustomButton/CustomButton";
 
-const ProductCard = ({ product }) => {
-  const { isAuthenticated } = useAuth();
-
+const ProductCard = ({ product, myProducts = false }) => {
   const handleImageError = (e) => {
     e.target.src = defaultImages.fallback;
   };
@@ -33,16 +30,23 @@ const ProductCard = ({ product }) => {
           style={{ height: "200px", objectFit: "cover" }}
           onError={handleImageError}
         />
-        <div className="position-absolute top-0 end-0 m-2 d-flex flex-column gap-1">
-          <CustomIconButton title={"Editar"} icon={<FaEdit />} />
-          <Desplegable product={product} />
 
-          <CustomIconButton
-            title={"Eliminar"}
-            icon={<FaTrash />}
-            variant="danger"
-            iconColor={"white"}
-          />
+        <div className="position-absolute top-0 end-0 m-2 d-flex flex-column gap-1">
+          {myProducts ? (
+            <>
+              <CustomButton title={"Editar"} icon={<FaEdit />} />
+              <Desplegable product={product} />
+
+              <CustomButton
+                title={"Eliminar"}
+                icon={<FaTrash />}
+                variant="danger"
+                iconColor={"white"}
+              />
+            </>
+          ) : (
+            <FavoriteButton product={product} />
+          )}
         </div>
       </div>
       <Card.Body className="d-flex flex-column">
