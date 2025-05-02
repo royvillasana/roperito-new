@@ -1,19 +1,20 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import { ProductProvider } from './context/ProductContext';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import Profile from './pages/Profile';
-import CreateProduct from './pages/CreateProduct';
-import Gallery from './pages/Gallery';
-import ProductDetail from './pages/ProductDetail';
-import HowItWorks from './pages/HowItWorks';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import { ProductProvider } from "./context/ProductContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import CreateProduct from "./pages/CreateProduct";
+import Gallery from "./pages/Gallery";
+import ProductDetail from "./pages/ProductDetail";
+import HowItWorks from "./pages/HowItWorks";
+import Home from "./pages/Home/Home";
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
+import "./App.css";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
           <div className="app min-vh-100 min-vw-100 d-flex flex-column">
             <Header />
             <main className="flex-grow-1">
-              <div className="container-fluid px-0">
+              <div className="container-fluid px-0 general-container">
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/register" element={<Register />} />

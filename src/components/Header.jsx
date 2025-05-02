@@ -1,7 +1,8 @@
-import { Navbar, Nav, Button, Container, Form } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { FaUser } from 'react-icons/fa';
+import { Navbar, Nav, Button, Container, Form } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { FaUser } from "react-icons/fa";
+import CustomButton from "./CustomButton/CustomButton";
 
 const Header = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -9,7 +10,7 @@ const Header = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -22,26 +23,31 @@ const Header = () => {
             height="30"
             className="me-2"
           />
-          <span className="text-primary fw-bold">Roperito</span>
+          <span className="section-title">Roperito</span>
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto align-items-center">
-            <Nav.Link as={Link} to="/gallery">Explorar</Nav.Link>
-            <Nav.Link as={Link} to="/how-it-works">¿Cómo funciona?</Nav.Link>
-            
+            <Nav.Link as={Link} to="/gallery">
+              Explorar
+            </Nav.Link>
+
             {isAuthenticated ? (
               <>
                 <Nav.Link as={Link} to="/create-product" className="me-2">
                   Publicar
                 </Nav.Link>
-                <Nav.Link as={Link} to="/profile" className="d-flex align-items-center">
+                <Nav.Link
+                  as={Link}
+                  to="/profile"
+                  className="d-flex align-items-center"
+                >
                   <FaUser className="me-2" />
                   Mi Perfil
                 </Nav.Link>
-                <Button 
-                  variant="outline-primary" 
+                <Button
+                  variant="outline-primary"
                   onClick={handleLogout}
                   className="ms-2"
                 >
@@ -50,15 +56,15 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Nav.Link as={Link} to="/login">Iniciar sesión</Nav.Link>
-                <Button 
-                  as={Link} 
-                  to="/register" 
-                  variant="primary"
+                <Nav.Link as={Link} to="/login">
+                  Iniciar sesión
+                </Nav.Link>
+
+                <CustomButton
+                  title={"Registrarse"}
+                  to={"/register"}
                   className="ms-2"
-                >
-                  Registrarse
-                </Button>
+                />
               </>
             )}
           </Nav>
@@ -68,4 +74,4 @@ const Header = () => {
   );
 };
 
-export default Header; 
+export default Header;
