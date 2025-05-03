@@ -1,49 +1,23 @@
 .custom-modal-content {
+  margin: auto;
   border-radius: 20px;
-  background: linear-gradient(145deg, #f4eaff, #ffe7f0);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   border: none;
   color: #5e4b8b;
+  width: 40%;
+  align-items: center;
 }
 
 .custom-modal-header,
 .custom-modal-footer {
   border: none;
   background-color: transparent;
+  color: var(--primary-color);
 }
 
 .custom-modal-body {
   font-size: 1.1rem;
   color: #6a4cad;
-}
-
-.btn-cancel,
-.btn-delete {
-  border-radius: 12px;
-  padding: 6px 16px;
-  font-weight: 500;
-  font-size: 0.95rem;
-  transition: 0.3s ease;
-}
-
-.btn-cancel {
-  background-color: #e2d9f3;
-  color: #5e4b8b;
-  border: none;
-}
-
-.btn-cancel:hover {
-  background-color: #d4c4ec;
-}
-
-.btn-delete {
-  background-color: #f87171;
-  color: white;
-  border: none;
-}
-
-.btn-delete:hover {
-  background-color: #ef4444;
 }
 
 .custom-modal-backdrop {

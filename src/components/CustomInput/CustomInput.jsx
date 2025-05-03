@@ -14,6 +14,7 @@ export default function CustomInput({
   register,
   errors,
   icon = null,
+  value = "",
 }) {
   return (
     <Form.Group className="mb-4">
@@ -26,6 +27,7 @@ export default function CustomInput({
         <div style={{ width: "100%" }}>
           <Form.Control
             type={type}
+            defaultValue={value}
             {...register(name, {
               required:
                 typeof required === "string"

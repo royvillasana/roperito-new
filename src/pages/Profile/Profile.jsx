@@ -13,21 +13,17 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const { user, isAuthenticated, logout } = useAuth();
-  const { products, favorites } = useProducts();
   const navigate = useNavigate();
 
   // Si no está autenticado, redirigir al login
   if (!isAuthenticated) {
-    navigate('/login');
+    navigate("/login");
     return null;
   }
 
-  // Simulamos productos del usuario usando los primeros 2 productos
-  const userProducts = products.slice(0, 2);
-
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -40,9 +36,9 @@ const Profile = () => {
               <div className="text-muted small">
                 {user?.email || "test@example.com"}
               </div>
-              <CustomButton 
-                title="Cerrar Sesión" 
-                icon={<BiLogOut />} 
+              <CustomButton
+                title="Cerrar Sesión"
+                icon={<BiLogOut />}
                 onClick={handleLogout}
               />
             </div>
@@ -80,8 +76,8 @@ const Profile = () => {
               <Tab.Content>
                 <Tab.Pane eventKey="publications">
                   <Row xs={1} md={2} className="g-4">
-                    {userProducts.length > 0 ? (
-                      userProducts.map((product) => (
+                    {user.products.length > 0 ? (
+                      user.products.map((product) => (
                         <Col key={product.id}>
                           <ProductCard product={product} myProducts />
                         </Col>
@@ -89,7 +85,9 @@ const Profile = () => {
                     ) : (
                       <Col xs={12}>
                         <div className="text-center py-4">
-                          <p className="text-muted">No tienes publicaciones aún</p>
+                          <p className="text-muted">
+                            No tienes publicaciones aún
+                          </p>
                           <CustomButton
                             title="Crear mi primera publicación"
                             icon={<PiPlus />}
@@ -103,8 +101,8 @@ const Profile = () => {
                 </Tab.Pane>
                 <Tab.Pane eventKey="favorites">
                   <Row xs={1} md={2} className="g-4">
-                    {favorites.length > 0 ? (
-                      favorites.map((product) => (
+                    {user.favorites.length > 0 ? (
+                      user.favorites.map((product) => (
                         <Col key={product.id}>
                           <ProductCard product={product} />
                         </Col>

@@ -1,33 +1,41 @@
 import { Modal, Button } from "react-bootstrap";
 import React from "react";
 import "./CustomModal.css"; // Asegúrate de importar los estilos
+import CustomButton from "../CustomButton/CustomButton";
 
 export default function CustomModal({
-  showConfirm,
-  cancelDelete,
-  confirmDelete,
+  textHeader = null,
+  children,
+  showModal,
+  closeModal,
+  confirm,
+  textButtonConfirm,
 }) {
   return (
     <Modal
-      show={showConfirm}
-      onHide={cancelDelete}
+      show={showModal}
+      onHide={closeModal}
       centered
       contentClassName="custom-modal-content"
       backdropClassName="custom-modal-backdrop"
     >
-      <Modal.Header closeButton className="custom-modal-header">
-        <Modal.Title>Confirmar eliminación</Modal.Title>
+      <Modal.Header className="custom-modal-header">
+        <Modal.Title>{textHeader}</Modal.Title>
       </Modal.Header>
-      <Modal.Body className="custom-modal-body">
-        ¿Estás seguro de que deseas eliminar este producto?
-      </Modal.Body>
+      <Modal.Body className="custom-modal-body">{children}</Modal.Body>
       <Modal.Footer className="custom-modal-footer">
-        <Button variant="light" className="btn-cancel" onClick={cancelDelete}>
-          Cancelar
-        </Button>
-        <Button variant="danger" className="btn-delete" onClick={confirmDelete}>
-          Eliminar
-        </Button>
+        <CustomButton
+          title={"Cancelar"}
+          onClick={closeModal}
+          variant="outline-primary"
+          style="ms-2"
+        />
+        <CustomButton
+          title={textButtonConfirm}
+          variant="primary"
+          onClick={confirm}
+          style="ms-2"
+        />
       </Modal.Footer>
     </Modal>
   );

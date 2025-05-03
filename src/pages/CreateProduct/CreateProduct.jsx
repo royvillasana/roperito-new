@@ -3,18 +3,55 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import "./CreateProduct.css";
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { CgClose } from "react-icons/cg";
 
 const CreateProduct = () => {
+  const location = useLocation();
+  const productToEdit = location.state?.product || null;
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: productToEdit || {},
+  });
+
+  const [selectedImages, setSelectedImages] = useState(
+    productToEdit?.images?.map((url) => ({ url })) || []
+  );
+
+  console.log(selectedImages.length);
+
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+
+    const previews = files.map((file) => ({
+      file,
+      url: URL.createObjectURL(file),
+    }));
+
+    setSelectedImages((prev) => [...prev, ...previews]);
+  };
+
+  const handleRemoveImage = (indexToRemove) => {
+    setSelectedImages((prev) =>
+      prev.filter((_, index) => index !== indexToRemove)
+    );
+  };
 
   const onSubmit = (data) => {
-    // Aquí colocaremos la lógica para conectar con el backend y enviar los datos del producto
-    console.log(data);
-    toast.success("¡Producto publicado exitosamente!");
+    if (productToEdit) {
+      console.log("Editando producto:", data);
+      toast.success("¡Producto editado exitosamente!");
+      // Aquí deberías hacer una llamada PUT al backend con productToEdit.id
+    } else {
+      console.log("Creando producto:", data);
+      toast.success("¡Producto creado exitosamente!");
+      // Aquí deberías hacer una llamada POST al backend
+    }
   };
 
   return (
@@ -23,7 +60,7 @@ const CreateProduct = () => {
         <Card className="mx-auto" style={{ maxWidth: "600px" }}>
           <Card.Body className="p-4">
             <h2 className="text-center mb-4 section-title">
-              Crear publicación
+              {productToEdit ? "Editar publicación" : "Crear publicación"}
             </h2>
             <Form onSubmit={handleSubmit(onSubmit)}>
               <Form.Group className="mb-3">
@@ -95,6 +132,8 @@ const CreateProduct = () => {
                       <option value="pantalones">Pantalones</option>
                       <option value="vestidos">Vestidos</option>
                       <option value="zapatos">Zapatos</option>
+                      <option value="poleras">Poleras</option>
+                      <option value="chaquetas">Chaquetas</option>
                     </Form.Select>
                     <Form.Control.Feedback type="invalid">
                       {errors.category?.message}
@@ -124,23 +163,89 @@ const CreateProduct = () => {
               </Form.Group>
 
               <Form.Group className="mb-4">
-                <Form.Label>Imágenes</Form.Label>
-                <Form.Control
-                  type="file"
-                  multiple
-                  accept="image/*"
-                  {...register("images", {
-                    required: "Debes subir al menos una imagen",
-                  })}
-                  isInvalid={!!errors.images}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {errors.images?.message}
-                </Form.Control.Feedback>
-                <Form.Text className="text-muted">
-                  Puedes subir hasta 3 imágenes. La primera será la imagen
-                  principal.
-                </Form.Text>
+                {selectedImages.length < 3 && (
+                  <>
+                    <Form.Label>Imágenes</Form.Label>
+                    <Form.Control
+                      type="file"
+                      multiple
+                      accept="image/*"
+                      {...register(
+                        "images",
+                        !productToEdit && {
+                          required: "Debes subir al menos una imagen",
+                        }
+                      )}
+                      onChange={(e) => {
+                        handleImageChange(e);
+                      }}
+                      isInvalid={!!errors.images}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.images?.message}
+                    </Form.Control.Feedback>
+                    <Form.Text className="text-muted">
+                      Puedes subir hasta 3 imágenes. La primera será la imagen
+                      principal.
+                    </Form.Text>
+                  </>
+                )}
+
+                {selectedImages.length > 0 && (
+                  <div className="d-flex gap-3 flex-wrap mt-3">
+                    {selectedImages.map((img, index) => (
+                      <div
+                        key={index}
+                        style={{
+                          position: "relative",
+                          width: "100px",
+                          height: "100px",
+                          borderRadius: "8px",
+                          overflow: "hidden",
+                          border: "1px solid #ccc",
+                        }}
+                      >
+                        <img
+                          src={img.url}
+                          alt={`preview-${index}`}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                          }}
+                        />
+                        <div
+                          onClick={() => handleRemoveImage(index)}
+                          style={{
+                            position: "absolute",
+                            top: "4px",
+                            right: "4px",
+                            background: "rgba(0, 0, 0, 0.6)",
+                            color: "#fff",
+                            borderRadius: "50%",
+                            width: "24px",
+                            height: "24px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            cursor: "pointer",
+                            transition: "background 0.2s",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background =
+                              "rgba(0, 0, 0, 0.8)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background =
+                              "rgba(0, 0, 0, 0.6)";
+                          }}
+                        >
+                          <CgClose />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </Form.Group>
               <div className="d-grid">
                 <CustomButton

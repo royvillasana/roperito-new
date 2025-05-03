@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { ButtonGroup, Dropdown } from "react-bootstrap";
 import CustomButton from "../CustomButton/CustomButton";
 
 export default function Desplegable({ product }) {
+  const [status, setStatus] = useState(product.status || "Estado");
+
   const handleStatusChange = (status) => {
     console.log("Nuevo estado:", status, "para el producto", product.id);
+    setStatus(status);
   };
 
   return (
     <Dropdown as={ButtonGroup}>
-      <CustomButton title={product.status || "Estado"} />
+      <CustomButton title={status} />
       <Dropdown.Toggle
         split
         variant="light"

@@ -1,5 +1,5 @@
 import { Card, Button, Dropdown, ButtonGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEdit, FaTrash, FaStar, FaHeart, FaRegHeart } from "react-icons/fa";
 import { defaultImages } from "../config/images";
 import Desplegable from "./Desplegable/Desplegable";
@@ -11,7 +11,7 @@ import CustomModal from "./CustomModal/CustomModal";
 
 const ProductCard = ({ product, myProducts = false }) => {
   const { isAuthenticated } = useAuth();
-  console.log("productcard recibe: ", product);
+  const navigation = useNavigate();
 
   const [showConfirm, setShowConfirm] = useState(false);
 
@@ -20,8 +20,9 @@ const ProductCard = ({ product, myProducts = false }) => {
   };
 
   const handleEdit = () => {
-    // Aquí podrías redirigir o abrir un modal
-    console.log("Editar", product.id);
+    navigation("/create-product", {
+      state: { product },
+    });
   };
 
   const handleDeleteClick = () => {
@@ -91,9 +92,12 @@ const ProductCard = ({ product, myProducts = false }) => {
         </Button>
       </Card.Body>
       <CustomModal
-        showConfirm={showConfirm}
-        confirmDelete={confirmDelete}
-        cancelDelete={cancelDelete}
+        textButtonConfirm={"Eliminar"}
+        textHeader={"Confirmar eliminación"}
+        children={"¿Estás seguro de que deseas eliminar este producto?"}
+        showModal={showConfirm}
+        confirm={confirmDelete}
+        closeModal={cancelDelete}
       />
     </Card>
   );
