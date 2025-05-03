@@ -4,15 +4,17 @@ import { FaHome, FaSearch } from 'react-icons/fa';
 
 const NotFound = () => {
   return (
-    <Container className="py-5 text-center">
+    <Container className="text-center container-fluid">
       <Row className="justify-content-center">
-        <Col md={8}>
+        <Col md={6}>
           <img
-            src="/images/not-found.png"
+            src="/images/404.png"
             alt="Ropa perdida"
-            className="img-fluid mb-4"
-            style={{ maxHeight: '300px' }}
+            className="w-100 h-100 object-fit-cover"
+            style={{ maxHeight: '100%' }}
           />
+          </Col>
+          <Col md={6} className=" p-5 d-flex  flex-column justify-content-center align-items-center">
           <h1 className="display-4 mb-4 gradient-primary">¡Ups! Parece que esta prenda se perdió</h1>
           <p className="lead mb-4">
             La página que buscas no está en nuestro armario. 
