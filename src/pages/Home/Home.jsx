@@ -1,7 +1,7 @@
-import { Container, Row, Col, Form, InputGroup } from "react-bootstrap";
-import { FaSearch } from "react-icons/fa";
+import { Container, Row, Col } from "react-bootstrap";
 import HeroSection from "../../components/HeroSection";
 import ProductCard from "../../components/ProductCard";
+import SearchBar from "../../components/SearchBar";
 import { useProducts } from "../../context/ProductContext";
 
 const Home = () => {
@@ -42,16 +42,10 @@ const Home = () => {
 
         <Row className="mb-4">
           <Col md={6} className="mx-auto">
-            <InputGroup>
-              <InputGroup.Text>
-                <FaSearch />
-              </InputGroup.Text>
-              <Form.Control
-                placeholder="Buscar prendas..."
-                value={filters.search}
-                onChange={handleSearchChange}
-              />
-            </InputGroup>
+            <SearchBar
+              value={filters.search}
+              onChange={handleSearchChange}
+            />
           </Col>
         </Row>
 

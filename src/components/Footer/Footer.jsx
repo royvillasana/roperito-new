@@ -1,18 +1,19 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
+import './Footer.css';
 
 const Footer = () => {
   return (
-    <footer className="bg-dark text-light" style={{ height: '250px', display: 'flex', flexDirection: 'column' }}>
-      <Container className="h-100 d-flex flex-column">
+    <footer className="footer">
+      <Container className="footer-container">
         {/* Sección principal del footer */}
         <Row className="p-4 mt-4 align-items-center flex-column flex-lg-row text-center text-lg-start gap-4 gap-lg-0">
           <Col xs={12} lg="auto" className="mb-3 mb-lg-0">
             <Link to="/" className="text-decoration-none text-light d-inline-flex align-items-center">
               <div className="logo-container me-2">
                 <img
-                  src="/logo.PNG"
+                  src="/logo2.PNG"
                   alt="Roperito"
                   className="logo-image"
                 />
@@ -67,35 +68,6 @@ const Footer = () => {
           </Row>
         </div>
       </Container>
-
-      <style jsx="true">{`
-        .logo-container {
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          overflow: hidden;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background-color: transparent;
-        }
-        .logo-image {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          mask-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' viewBox='0 0 100 100' version='1.1' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='50'/%3E%3C/svg%3E");
-          mask-mode: alpha;
-          -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' viewBox='0 0 100 100' version='1.1' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='50'/%3E%3C/svg%3E");
-          -webkit-mask-mode: alpha;
-        }
-
-        @media (max-width: 991px) {
-          footer {
-            height: auto !important;
-            min-height: 250px;
-          }
-        }
-      `}</style>
     </footer>
   );
 };

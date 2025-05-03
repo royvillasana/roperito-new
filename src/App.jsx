@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer/Footer";
 import CreateProduct from "./pages/CreateProduct";
 import Gallery from "./pages/Gallery";
 import ProductDetail from "./pages/ProductDetail";
@@ -15,6 +15,7 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import "./App.css";
 import Profile from "./pages/Profile/Profile";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
                   <Route path="/gallery" element={<Gallery />} />
                   <Route path="/product/:id" element={<ProductDetail />} />
                   <Route path="/how-it-works" element={<HowItWorks />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </div>
             </main>

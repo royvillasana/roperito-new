@@ -18,7 +18,7 @@ const Header = () => {
       <Container>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center align-self-center">
           <img
-            src="public/logo.PNG"
+            src="/logo2.PNG"
             alt="Hanger"
             height="48"
             className="me-2"
