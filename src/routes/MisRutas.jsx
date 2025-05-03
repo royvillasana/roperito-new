@@ -17,8 +17,9 @@ import Register from "../pages/Auth/Register";
 import Profile from "../pages/Profile/Profile";
 import PrivateRoute from "../config/PrivateRoute";
 import { useAuth } from "../context/AuthContext";
+import Footer from "../components/Footer/Footer";
 import Header from "../components/Header";
-import Footer from "../components/Footer";
+import NotFound from "../pages/NotFound/NotFound";
 
 function MisRutas() {
   const { isAuthenticated } = useAuth();
@@ -31,6 +32,7 @@ function MisRutas() {
           <div className="container-fluid px-0 general-container">
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="*" element={<NotFound />} />
               <Route
                 path="/register"
                 element={

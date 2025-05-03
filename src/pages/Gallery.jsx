@@ -1,7 +1,8 @@
-import { Container, Row, Col, Form, InputGroup } from 'react-bootstrap';
-import { FaSearch } from 'react-icons/fa';
+import { Container, Row, Col, Form } from 'react-bootstrap';
 import { useProducts } from '../context/ProductContext';
 import ProductCard from '../components/ProductCard';
+import SearchBar from '../components/SearchBar';
+import './Gallery.css';
 
 const Gallery = () => {
   const { products, filters, updateFilters } = useProducts();
@@ -17,23 +18,17 @@ const Gallery = () => {
       {/* Filtros */}
       <Row className="mb-4">
         <Col md={6} className="mb-3 mb-md-0">
-          <InputGroup>
-            <InputGroup.Text>
-              <FaSearch />
-            </InputGroup.Text>
-            <Form.Control
-              placeholder="Buscar prendas..."
-              value={filters.search}
-              onChange={(e) => handleFilterChange('search', e.target.value)}
-            />
-          </InputGroup>
+          <SearchBar
+            value={filters.search}
+            onChange={e => handleFilterChange('search', e.target.value)}
+          />
         </Col>
-        <Col md={2}>
+        <Col md={2} className="mb-3 mb-md-0">
           <Form.Select
             value={filters.category}
-            onChange={(e) => handleFilterChange('category', e.target.value)}
+            onChange={e => handleFilterChange('category', e.target.value)}
           >
-            <option value="">Todas</option>
+            <option value="">Prenda</option>
             <option value="camisetas">Camisetas</option>
             <option value="pantalones">Pantalones</option>
             <option value="vestidos">Vestidos</option>
@@ -43,9 +38,9 @@ const Gallery = () => {
         <Col md={2}>
           <Form.Select
             value={filters.size}
-            onChange={(e) => handleFilterChange('size', e.target.value)}
+            onChange={e => handleFilterChange('size', e.target.value)}
           >
-            <option value="">Todas</option>
+            <option value="">Talla</option>
             <option value="XS">XS</option>
             <option value="S">S</option>
             <option value="M">M</option>
@@ -56,9 +51,9 @@ const Gallery = () => {
         <Col md={2}>
           <Form.Select
             value={filters.price}
-            onChange={(e) => handleFilterChange('price', e.target.value)}
+            onChange={e => handleFilterChange('price', e.target.value)}
           >
-            <option value="">Todos</option>
+            <option value="">Rango de $</option>
             <option value="0-25">$0 - $25</option>
             <option value="25-50">$25 - $50</option>
             <option value="50-100">$50 - $100</option>
@@ -79,4 +74,4 @@ const Gallery = () => {
   );
 };
 
-export default Gallery; 
+export default Gallery;
