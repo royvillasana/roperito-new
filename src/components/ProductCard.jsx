@@ -5,8 +5,16 @@ import { defaultImages } from "../config/images";
 import Desplegable from "./Desplegable/Desplegable";
 import FavoriteButton from "./CustomButton/FavoriteButton/FavoriteButton";
 import CustomButton from "./CustomButton/CustomButton";
+import { useAuth } from "../context/AuthContext";
+import { useState } from "react";
+import CustomModal from "./CustomModal/CustomModal";
 
 const ProductCard = ({ product, myProducts = false }) => {
+  const { isAuthenticated } = useAuth();
+  console.log("productcard recibe: ", product);
+
+  const [showConfirm, setShowConfirm] = useState(false);
+
   const handleImageError = (e) => {
     e.target.src = defaultImages.fallback;
   };
@@ -16,8 +24,18 @@ const ProductCard = ({ product, myProducts = false }) => {
     console.log("Editar", product.id);
   };
 
-  const handleDelete = () => {
+  const handleDeleteClick = () => {
+    setShowConfirm(true); // Abre el modal de confirmación
+  };
+
+  const confirmDelete = () => {
     console.log("Eliminar", product.id);
+    setShowConfirm(false);
+    // Aquí luego llamas a tu API para eliminar realmente
+  };
+
+  const cancelDelete = () => {
+    setShowConfirm(false);
   };
 
   return (
@@ -25,7 +43,7 @@ const ProductCard = ({ product, myProducts = false }) => {
       <div className="position-relative">
         <Card.Img
           variant="top"
-          src={product.image || product.mainImage || defaultImages.fallback}
+          src={product.images[0] || product.mainImage || defaultImages.fallback}
           alt={product.name || product.title || "Producto"}
           style={{ height: "200px", objectFit: "cover" }}
           onError={handleImageError}
@@ -34,7 +52,11 @@ const ProductCard = ({ product, myProducts = false }) => {
         <div className="position-absolute top-0 end-0 m-2 d-flex flex-column gap-1">
           {myProducts ? (
             <>
-              <CustomButton title={"Editar"} icon={<FaEdit />} />
+              <CustomButton
+                title={"Editar"}
+                icon={<FaEdit />}
+                onClick={handleEdit}
+              />
               <Desplegable product={product} />
 
               <CustomButton
@@ -42,10 +64,11 @@ const ProductCard = ({ product, myProducts = false }) => {
                 icon={<FaTrash />}
                 variant="danger"
                 iconColor={"white"}
+                onClick={handleDeleteClick}
               />
             </>
           ) : (
-            <FavoriteButton product={product} />
+            isAuthenticated && <FavoriteButton product={product} />
           )}
         </div>
       </div>
@@ -67,6 +90,11 @@ const ProductCard = ({ product, myProducts = false }) => {
           Ver detalle
         </Button>
       </Card.Body>
+      <CustomModal
+        showConfirm={showConfirm}
+        confirmDelete={confirmDelete}
+        cancelDelete={cancelDelete}
+      />
     </Card>
   );
 };

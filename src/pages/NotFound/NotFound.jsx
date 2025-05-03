@@ -1,20 +1,20 @@
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container, Row, Col, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
     <Container className="py-5">
       <Row className="justify-content-center text-center">
         <Col md={8} lg={6}>
-          <div className="mb-4" style={{ maxWidth: '100%', height: 'auto' }}>
+          <div className="mb-4" style={{ maxWidth: "100%", height: "auto" }}>
             <img
               src="/images/404.png"
               alt="404 - Página no encontrada"
               style={{
-                width: '100%',
-                height: 'auto',
-                objectFit: 'cover',
-                display: 'block'
+                width: "100%",
+                height: "auto",
+                objectFit: "cover",
+                display: "block",
               }}
             />
           </div>
@@ -31,4 +31,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound; 
+export default NotFound;

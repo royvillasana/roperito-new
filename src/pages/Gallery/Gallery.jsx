@@ -1,13 +1,14 @@
-import { Container, Row, Col, Form } from 'react-bootstrap';
-import { useProducts } from '../context/ProductContext';
-import ProductCard from '../components/ProductCard';
-import SearchBar from '../components/SearchBar';
-import './Gallery.css';
+import { Container, Row, Col, Form } from "react-bootstrap";
+import ProductCard from "../../components/ProductCard";
+import SearchBar from "../../components/SearchBar";
+import "./Gallery.css";
+import { useProducts } from "../../context/ProductContext";
 
 const Gallery = () => {
   const { products, filters, updateFilters } = useProducts();
 
   const handleFilterChange = (field, value) => {
+    console.log(value);
     updateFilters({ [field]: value });
   };
 
@@ -20,16 +21,16 @@ const Gallery = () => {
         <Col md={6} className="mb-3 mb-md-0">
           <SearchBar
             value={filters.search}
-            onChange={e => handleFilterChange('search', e.target.value)}
+            onChange={(e) => handleFilterChange("search", e.target.value)}
           />
         </Col>
         <Col md={2} className="mb-3 mb-md-0">
           <Form.Select
             value={filters.category}
-            onChange={e => handleFilterChange('category', e.target.value)}
+            onChange={(e) => handleFilterChange("category", e.target.value)}
           >
             <option value="">Prenda</option>
-            <option value="camisetas">Camisetas</option>
+            <option value="chaquetas">Chaquetas</option>
             <option value="pantalones">Pantalones</option>
             <option value="vestidos">Vestidos</option>
             <option value="zapatos">Zapatos</option>
@@ -38,7 +39,7 @@ const Gallery = () => {
         <Col md={2}>
           <Form.Select
             value={filters.size}
-            onChange={e => handleFilterChange('size', e.target.value)}
+            onChange={(e) => handleFilterChange("size", e.target.value)}
           >
             <option value="">Talla</option>
             <option value="XS">XS</option>
@@ -51,20 +52,20 @@ const Gallery = () => {
         <Col md={2}>
           <Form.Select
             value={filters.price}
-            onChange={e => handleFilterChange('price', e.target.value)}
+            onChange={(e) => handleFilterChange("price", e.target.value)}
           >
             <option value="">Rango de $</option>
-            <option value="0-25">$0 - $25</option>
-            <option value="25-50">$25 - $50</option>
-            <option value="50-100">$50 - $100</option>
-            <option value="100+">$100+</option>
+            <option value="0-5000">$0 - $5.000</option>
+            <option value="5000-10000">$5.000 - $10.000</option>
+            <option value="10000-50000">$10.000 - $50.000</option>
+            <option value="100000+">$100.000+</option>
           </Form.Select>
         </Col>
       </Row>
 
       {/* Grid de productos */}
       <Row xs={1} md={2} lg={3} className="g-4">
-        {products.map(product => (
+        {products.map((product) => (
           <Col key={product.id}>
             <ProductCard product={product} />
           </Col>

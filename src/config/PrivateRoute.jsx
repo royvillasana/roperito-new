@@ -4,5 +4,5 @@ import { useAuth } from "../context/AuthContext";
 export default function PrivateRoute() {
   const { isAuthenticated } = useAuth();
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/" replace />;
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
 }
