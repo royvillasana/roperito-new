@@ -2,6 +2,7 @@ import { Container, Row, Col, Form } from 'react-bootstrap';
 import { useProducts } from '../context/ProductContext';
 import ProductCard from '../components/ProductCard';
 import SearchBar from '../components/SearchBar';
+import './Gallery.css';
 
 const Gallery = () => {
   const { products, filters, updateFilters } = useProducts();

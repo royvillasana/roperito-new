@@ -2,6 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import HeroSection from "../../components/HeroSection";
 import ProductCard from "../../components/ProductCard";
 import SearchBar from "../../components/SearchBar";
+import "./Home.css";
 import { useProducts } from "../../context/ProductContext";
 
 const Home = () => {
