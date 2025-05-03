@@ -1,35 +1,41 @@
-import { Container, Form, Button, Card, Row, Col } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import CustomButton from "../components/CustomButton/CustomButton";
-import './CreateProduct.css';
+import { Container, Form, Button, Card, Row, Col } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import CustomButton from "../../components/CustomButton/CustomButton";
+import "./CreateProduct.css";
 
 const CreateProduct = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = (data) => {
     // Aquí colocaremos la lógica para conectar con el backend y enviar los datos del producto
     console.log(data);
-    toast.success('¡Producto publicado exitosamente!');
+    toast.success("¡Producto publicado exitosamente!");
   };
 
   return (
     <div className="create-product">
       <Container className="py-5">
-        <Card className="mx-auto" style={{ maxWidth: '600px' }}>
+        <Card className="mx-auto" style={{ maxWidth: "600px" }}>
           <Card.Body className="p-4">
-            <h2 className="text-center mb-4 section-title">Crear publicación</h2>
+            <h2 className="text-center mb-4 section-title">
+              Crear publicación
+            </h2>
             <Form onSubmit={handleSubmit(onSubmit)}>
               <Form.Group className="mb-3">
                 <Form.Label>Título</Form.Label>
                 <Form.Control
                   type="text"
-                  {...register('title', {
-                    required: 'El título es requerido',
+                  {...register("title", {
+                    required: "El título es requerido",
                     minLength: {
                       value: 5,
-                      message: 'El título debe tener al menos 5 caracteres'
-                    }
+                      message: "El título debe tener al menos 5 caracteres",
+                    },
                   })}
                   isInvalid={!!errors.title}
                 />
@@ -43,8 +49,8 @@ const CreateProduct = () => {
                 <Form.Control
                   as="textarea"
                   rows={3}
-                  {...register('description', {
-                    required: 'La descripción es requerida'
+                  {...register("description", {
+                    required: "La descripción es requerida",
                   })}
                   isInvalid={!!errors.description}
                 />
@@ -58,8 +64,8 @@ const CreateProduct = () => {
                   <Form.Group>
                     <Form.Label>Talla</Form.Label>
                     <Form.Select
-                      {...register('size', {
-                        required: 'La talla es requerida'
+                      {...register("size", {
+                        required: "La talla es requerida",
                       })}
                       isInvalid={!!errors.size}
                     >
@@ -79,8 +85,8 @@ const CreateProduct = () => {
                   <Form.Group>
                     <Form.Label>Categoría</Form.Label>
                     <Form.Select
-                      {...register('category', {
-                        required: 'La categoría es requerida'
+                      {...register("category", {
+                        required: "La categoría es requerida",
                       })}
                       isInvalid={!!errors.category}
                     >
@@ -103,12 +109,12 @@ const CreateProduct = () => {
                   type="number"
                   step="0.01"
                   min="0"
-                  {...register('price', {
-                    required: 'El precio es requerido',
+                  {...register("price", {
+                    required: "El precio es requerido",
                     min: {
                       value: 0,
-                      message: 'El precio debe ser mayor a 0'
-                    }
+                      message: "El precio debe ser mayor a 0",
+                    },
                   })}
                   isInvalid={!!errors.price}
                 />
@@ -123,8 +129,8 @@ const CreateProduct = () => {
                   type="file"
                   multiple
                   accept="image/*"
-                  {...register('images', {
-                    required: 'Debes subir al menos una imagen'
+                  {...register("images", {
+                    required: "Debes subir al menos una imagen",
                   })}
                   isInvalid={!!errors.images}
                 />
@@ -132,7 +138,8 @@ const CreateProduct = () => {
                   {errors.images?.message}
                 </Form.Control.Feedback>
                 <Form.Text className="text-muted">
-                  Puedes subir hasta 3 imágenes. La primera será la imagen principal.
+                  Puedes subir hasta 3 imágenes. La primera será la imagen
+                  principal.
                 </Form.Text>
               </Form.Group>
               <div className="d-grid">
@@ -151,4 +158,4 @@ const CreateProduct = () => {
   );
 };
 
-export default CreateProduct; 
+export default CreateProduct;

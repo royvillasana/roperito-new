@@ -1,8 +1,6 @@
-import { Container, Row, Col, Card, Button, Nav, Tab } from "react-bootstrap";
-import { FaUser, FaStar, FaFolderMinus } from "react-icons/fa";
+import { Container, Row, Col, Card, Nav, Tab } from "react-bootstrap";
 import { useAuth } from "../../context/AuthContext";
 import ProductCard from "../../components/ProductCard";
-import { useProducts } from "../../context/ProductContext";
 import CustomAvatar from "../../components/CustomAvatar/CustomAvatar";
 import "./Profile.css";
 import { BiHeart, BiLogOut } from "react-icons/bi";
@@ -12,11 +10,6 @@ import { PiPlus } from "react-icons/pi";
 
 const Profile = () => {
   const { user } = useAuth();
-  const { products, favorites } = useProducts();
-
-  // Simulamos productos del usuario
-  const userProducts = products.slice(0, 2);
-  console.log("que trae prodcut: ", products);
 
   return (
     <Container className="py-5 profile-contain">
@@ -63,7 +56,7 @@ const Profile = () => {
               <Tab.Content>
                 <Tab.Pane eventKey="publications">
                   <Row xs={1} md={2} className="g-4">
-                    {user.products.map((product) => (
+                    {user?.products.map((product) => (
                       <Col key={product.id}>
                         <ProductCard product={product} myProducts />
                       </Col>
@@ -72,7 +65,7 @@ const Profile = () => {
                 </Tab.Pane>
                 <Tab.Pane eventKey="favorites">
                   <Row xs={1} md={2} className="g-4">
-                    {user.favorites.map((product) => (
+                    {user?.favorites.map((product) => (
                       <Col key={product.id}>
                         <ProductCard product={product} />
                       </Col>

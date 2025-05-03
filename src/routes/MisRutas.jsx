@@ -7,8 +7,8 @@ import {
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import CreateProduct from "../pages/CreateProduct";
-import Gallery from "../pages/Gallery";
+import CreateProduct from "../pages/CreateProduct/CreateProduct";
+import Gallery from "../pages/Gallery/Gallery";
 import ProductDetail from "../pages/ProductDetail";
 import HowItWorks from "../pages/HowItWorks";
 import Home from "../pages/Home/Home";
@@ -45,11 +45,11 @@ function MisRutas() {
                   isAuthenticated ? <Navigate to={"/profile"} /> : <Login />
                 }
               />
+              <Route path="/gallery" element={<Gallery />} />
               <Route path="/how-it-works" element={<HowItWorks />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/create-product" element={<CreateProduct />} />
-                <Route path="/gallery" element={<Gallery />} />
                 <Route path="/product/:id" element={<ProductDetail />} />
               </Route>
             </Routes>
