@@ -1,12 +1,12 @@
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import { FaUserPlus, FaTshirt, FaComments, FaShieldAlt } from 'react-icons/fa';
+import { FaUserPlus, FaTshirt, FaComments, FaShieldAlt, FaSearch } from 'react-icons/fa';
 
 const HowItWorks = () => {
   return (
     <Container className="py-5">
       <h1 className="text-center mb-5">¿Cómo funciona Roperito?</h1>
       <p className="text-center lead mb-5">
-        Te guiamos paso a paso para que puedas <strong>vender/Comprar </strong> 
+        Te guiamos paso a paso para que puedas <strong>vender </strong> 
          prendas usadas de una forma simple y rápida.
       </p>
 
@@ -81,7 +81,7 @@ const HowItWorks = () => {
           <Card className="h-100 text-center p-4">
             <Card.Body>
               <div className="mb-3">
-              <FaTshirt size={40} className="text-primary" />
+              <FaSearch size={40} className="text-primary" />
               </div>
               <h3>2. Descubre nuestro catálogo</h3>
               <p>
