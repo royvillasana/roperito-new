@@ -1,15 +1,34 @@
-import { Container, Row, Col, Card, Nav, Tab } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Nav, Tab } from "react-bootstrap";
+import { FaUser, FaStar, FaFolderMinus } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
 import ProductCard from "../../components/ProductCard";
+import { useProducts } from "../../context/ProductContext";
 import CustomAvatar from "../../components/CustomAvatar/CustomAvatar";
 import "./Profile.css";
 import { BiHeart, BiLogOut } from "react-icons/bi";
 import { CiFolderOn } from "react-icons/ci";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import { PiPlus } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-  const { user } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
+  const { products, favorites } = useProducts();
+  const navigate = useNavigate();
+
+  // Si no está autenticado, redirigir al login
+  if (!isAuthenticated) {
+    navigate('/login');
+    return null;
+  }
+
+  // Simulamos productos del usuario usando los primeros 2 productos
+  const userProducts = products.slice(0, 2);
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <Container className="py-5 profile-contain">
@@ -21,7 +40,11 @@ const Profile = () => {
               <div className="text-muted small">
                 {user?.email || "test@example.com"}
               </div>
-              <CustomButton title={"Cerrar Sesión"} icon={<BiLogOut />} />
+              <CustomButton 
+                title="Cerrar Sesión" 
+                icon={<BiLogOut />} 
+                onClick={handleLogout}
+              />
             </div>
           </Card.Body>
         </Card>
@@ -46,9 +69,10 @@ const Profile = () => {
             </Card.Header>
             <div className="div-publish">
               <CustomButton
-                title={"Crear publicación"}
+                title="Crear publicación"
                 icon={<PiPlus />}
-                to={"/create-product"}
+                to="/create-product"
+                variant="primary"
               />
             </div>
 
@@ -56,20 +80,48 @@ const Profile = () => {
               <Tab.Content>
                 <Tab.Pane eventKey="publications">
                   <Row xs={1} md={2} className="g-4">
-                    {user?.products.map((product) => (
-                      <Col key={product.id}>
-                        <ProductCard product={product} myProducts />
+                    {userProducts.length > 0 ? (
+                      userProducts.map((product) => (
+                        <Col key={product.id}>
+                          <ProductCard product={product} myProducts />
+                        </Col>
+                      ))
+                    ) : (
+                      <Col xs={12}>
+                        <div className="text-center py-4">
+                          <p className="text-muted">No tienes publicaciones aún</p>
+                          <CustomButton
+                            title="Crear mi primera publicación"
+                            icon={<PiPlus />}
+                            to="/create-product"
+                            variant="primary"
+                          />
+                        </div>
                       </Col>
-                    ))}
+                    )}
                   </Row>
                 </Tab.Pane>
                 <Tab.Pane eventKey="favorites">
                   <Row xs={1} md={2} className="g-4">
-                    {user?.favorites.map((product) => (
-                      <Col key={product.id}>
-                        <ProductCard product={product} />
+                    {favorites.length > 0 ? (
+                      favorites.map((product) => (
+                        <Col key={product.id}>
+                          <ProductCard product={product} />
+                        </Col>
+                      ))
+                    ) : (
+                      <Col xs={12}>
+                        <div className="text-center py-4">
+                          <p className="text-muted">No tienes favoritos aún</p>
+                          <CustomButton
+                            title="Explorar productos"
+                            icon={<FaUser />}
+                            to="/gallery"
+                            variant="primary"
+                          />
+                        </div>
                       </Col>
-                    ))}
+                    )}
                   </Row>
                 </Tab.Pane>
               </Tab.Content>

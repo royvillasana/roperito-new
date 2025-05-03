@@ -24,10 +24,21 @@ export const API_CONFIG = {
         METADATA: {
             CATEGORIES: '/api/metadata/categories',
             SIZES: '/api/metadata/sizes'
+        },
+        ORDERS: {
+            BASE: '/api/orders',
+            BY_ID: (id) => `/api/orders/${id}`,
+            STATUS: (id) => `/api/orders/${id}/status`,
+            USER_ORDERS: '/api/users/orders'
         }
     },
     STATUS: {
         AVAILABLE: 'disponible',
         SOLD: 'vendido'
+    },
+    ORDER_STATUS: {
+        COMPLETED: 'completed',
+        CANCELLED: 'cancelled',
+        PENDING: 'pending'
     }
 };
