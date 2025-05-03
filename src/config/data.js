@@ -23,14 +23,14 @@ export const userProfile = [
         title: "Camiseta Retro",
         price: 19.99,
         mainImage: defaultImages.products[0],
-        status: "active",
+        status: "Vendido",
       },
       {
         id: "p002",
         title: "Gorra Gamer",
         price: 14.5,
         mainImage: defaultImages.products[1],
-        status: "inactive",
+        status: "Vendido",
       },
     ],
     favorites: [

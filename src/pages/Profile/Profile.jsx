@@ -52,7 +52,11 @@ const Profile = () => {
               </Nav>
             </Card.Header>
             <div className="div-publish">
-              <CustomButton title={"Crear publicación"} icon={<PiPlus />} />
+              <CustomButton
+                title={"Crear publicación"}
+                icon={<PiPlus />}
+                to={"/create-product"}
+              />
             </div>
 
             <Card.Body>
