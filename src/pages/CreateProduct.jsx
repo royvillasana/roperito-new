@@ -1,6 +1,7 @@
 import { Container, Form, Button, Card, Row, Col } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import CustomButton from "../components/CustomButton/CustomButton";
 import './CreateProduct.css';
 
 const CreateProduct = () => {
@@ -134,10 +135,11 @@ const CreateProduct = () => {
                   Puedes subir hasta 3 imágenes. La primera será la imagen principal.
                 </Form.Text>
               </Form.Group>
-
-              <Button variant="primary" type="submit" className="w-100">
-                Publicar
-              </Button>
+              <CustomButton
+              title={"Publicar"}
+              type={"submit"}
+              className="w-100 mb-3"
+            />
             </Form>
           </Card.Body>
         </Card>
