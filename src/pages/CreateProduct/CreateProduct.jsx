@@ -142,11 +142,14 @@ const CreateProduct = () => {
                   principal.
                 </Form.Text>
               </Form.Group>
-              <CustomButton
-                title={"Publicar"}
-                type={"submit"}
-                className="w-100 mb-3"
-              />
+              <div className="d-grid">
+                <CustomButton
+                  title="Publicar"
+                  type="submit"
+                  variant="primary"
+                  style="py-2 fw-semibold"
+                />
+              </div>
             </Form>
           </Card.Body>
         </Card>
