@@ -1,6 +1,8 @@
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import ProductCard from "../../components/ProductCard";
 import SearchBar from "../../components/SearchBar";
+import FilterSelect from "../../components/FilterSelect/FilterSelect";
+import { CATEGORY_OPTIONS, SIZE_OPTIONS, PRICE_RANGE_OPTIONS } from "../../config/categories";
 import "./Gallery.css";
 import { useProducts } from "../../context/ProductContext";
 
@@ -25,41 +27,31 @@ const Gallery = () => {
           />
         </Col>
         <Col md={2} className="mb-3 mb-md-0">
-          <Form.Select
+          <FilterSelect
             value={filters.category}
-            onChange={(e) => handleFilterChange("category", e.target.value)}
-          >
-            <option value="">Prenda</option>
-            <option value="chaquetas">Chaquetas</option>
-            <option value="pantalones">Pantalones</option>
-            <option value="vestidos">Vestidos</option>
-            <option value="zapatos">Zapatos</option>
-          </Form.Select>
+            onChange={handleFilterChange}
+            options={CATEGORY_OPTIONS}
+            placeholder="Prenda"
+            name="category"
+          />
         </Col>
         <Col md={2}>
-          <Form.Select
+          <FilterSelect
             value={filters.size}
-            onChange={(e) => handleFilterChange("size", e.target.value)}
-          >
-            <option value="">Talla</option>
-            <option value="XS">XS</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-          </Form.Select>
+            onChange={handleFilterChange}
+            options={SIZE_OPTIONS}
+            placeholder="Talla"
+            name="size"
+          />
         </Col>
         <Col md={2}>
-          <Form.Select
+          <FilterSelect
             value={filters.price}
-            onChange={(e) => handleFilterChange("price", e.target.value)}
-          >
-            <option value="">Rango de $</option>
-            <option value="0-5000">$0 - $5.000</option>
-            <option value="5000-10000">$5.000 - $10.000</option>
-            <option value="10000-50000">$10.000 - $50.000</option>
-            <option value="100000+">$100.000+</option>
-          </Form.Select>
+            onChange={handleFilterChange}
+            options={PRICE_RANGE_OPTIONS}
+            placeholder="Rango de $"
+            name="price"
+          />
         </Col>
       </Row>
 

@@ -2,6 +2,8 @@ import { Container, Form, Button, Card, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import CustomButton from "../../components/CustomButton/CustomButton";
+import FilterSelect from "../../components/FilterSelect/FilterSelect";
+import { CATEGORY_OPTIONS, SIZE_OPTIONS } from "../../config/categories";
 import "./CreateProduct.css";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
@@ -15,6 +17,8 @@ const CreateProduct = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
+    watch,
   } = useForm({
     defaultValues: productToEdit || {},
   });
@@ -23,7 +27,9 @@ const CreateProduct = () => {
     productToEdit?.images?.map((url) => ({ url })) || []
   );
 
-  console.log(selectedImages.length);
+  const handleSelectChange = (field, value) => {
+    setValue(field, value);
+  };
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -46,11 +52,9 @@ const CreateProduct = () => {
     if (productToEdit) {
       console.log("Editando producto:", data);
       toast.success("¡Producto editado exitosamente!");
-      // Aquí deberías hacer una llamada PUT al backend con productToEdit.id
     } else {
       console.log("Creando producto:", data);
       toast.success("¡Producto creado exitosamente!");
-      // Aquí deberías hacer una llamada POST al backend
     }
   };
 
@@ -100,44 +104,35 @@ const CreateProduct = () => {
                 <Col md={6}>
                   <Form.Group>
                     <Form.Label>Talla</Form.Label>
-                    <Form.Select
-                      {...register("size", {
-                        required: "La talla es requerida",
-                      })}
-                      isInvalid={!!errors.size}
-                    >
-                      <option value="">Selecciona una talla</option>
-                      <option value="XS">XS</option>
-                      <option value="S">S</option>
-                      <option value="M">M</option>
-                      <option value="L">L</option>
-                      <option value="XL">XL</option>
-                    </Form.Select>
-                    <Form.Control.Feedback type="invalid">
-                      {errors.size?.message}
-                    </Form.Control.Feedback>
+                    <FilterSelect
+                      value={watch("size") || ""}
+                      onChange={handleSelectChange}
+                      options={SIZE_OPTIONS}
+                      placeholder="Selecciona una talla"
+                      name="size"
+                    />
+                    {errors.size && (
+                      <Form.Text className="text-danger">
+                        {errors.size.message}
+                      </Form.Text>
+                    )}
                   </Form.Group>
                 </Col>
                 <Col md={6}>
                   <Form.Group>
                     <Form.Label>Categoría</Form.Label>
-                    <Form.Select
-                      {...register("category", {
-                        required: "La categoría es requerida",
-                      })}
-                      isInvalid={!!errors.category}
-                    >
-                      <option value="">Selecciona una categoría</option>
-                      <option value="camisetas">Camisetas</option>
-                      <option value="pantalones">Pantalones</option>
-                      <option value="vestidos">Vestidos</option>
-                      <option value="zapatos">Zapatos</option>
-                      <option value="poleras">Poleras</option>
-                      <option value="chaquetas">Chaquetas</option>
-                    </Form.Select>
-                    <Form.Control.Feedback type="invalid">
-                      {errors.category?.message}
-                    </Form.Control.Feedback>
+                    <FilterSelect
+                      value={watch("category") || ""}
+                      onChange={handleSelectChange}
+                      options={CATEGORY_OPTIONS}
+                      placeholder="Selecciona una categoría"
+                      name="category"
+                    />
+                    {errors.category && (
+                      <Form.Text className="text-danger">
+                        {errors.category.message}
+                      </Form.Text>
+                    )}
                   </Form.Group>
                 </Col>
               </Row>
@@ -180,6 +175,7 @@ const CreateProduct = () => {
                         handleImageChange(e);
                       }}
                       isInvalid={!!errors.images}
+                      lang="es"
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.images?.message}

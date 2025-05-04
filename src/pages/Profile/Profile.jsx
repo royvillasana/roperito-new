@@ -69,6 +69,7 @@ const Profile = () => {
                 icon={<PiPlus />}
                 to="/create-product"
                 variant="primary"
+                iconColor="white"
               />
             </div>
 
