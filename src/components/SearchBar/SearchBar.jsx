@@ -1,12 +1,14 @@
 import { InputGroup, Form } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
+import "./SearchBar.css";
 
 const SearchBar = ({ value, onChange, placeholder = "Buscar prendas..." }) => (
-  <InputGroup>
-    <InputGroup.Text>
+  <InputGroup className="search-bar">
+    <InputGroup.Text className="search-icon">
       <FaSearch />
     </InputGroup.Text>
     <Form.Control
+      className="search-input"
       placeholder={placeholder}
       value={value}
       onChange={onChange}
@@ -14,4 +16,4 @@ const SearchBar = ({ value, onChange, placeholder = "Buscar prendas..." }) => (
   </InputGroup>
 );
 
-export default SearchBar;
+export default SearchBar; 

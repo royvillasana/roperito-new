@@ -1,0 +1,48 @@
+.hero-section {
+    background-color: var(--background-light);
+    padding: 5rem 0;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.hero-button {
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+
+.hero-button:hover {
+    transform: translateY(-2px);
+}
+
+.hero-image {
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 1rem;
+    box-shadow: var(--box-shadow);
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 3rem 0;
+    }
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    .hero-subtitle {
+        font-size: 1.25rem;
+    }
+}
