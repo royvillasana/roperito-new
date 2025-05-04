@@ -3,11 +3,28 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import FilterSelect from "../../components/FilterSelect/FilterSelect";
-import { CATEGORY_OPTIONS, SIZE_OPTIONS } from "../../config/categories";
+import { AllProducts } from "../../config/data";
 import "./CreateProduct.css";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { CgClose } from "react-icons/cg";
+
+// Extraer categorías únicas de los productos
+const CATEGORY_OPTIONS = [...new Set(AllProducts.map(product => product.category))]
+  .map(category => ({
+    value: category,
+    label: category.charAt(0).toUpperCase() + category.slice(1)
+  }));
+
+const SIZE_OPTIONS = [
+  { value: "XS", label: "XS" },
+  { value: "S", label: "S" },
+  { value: "M", label: "M" },
+  { value: "L", label: "L" },
+  { value: "XL", label: "XL" },
+  { value: "U", label: "U" },
+  { value: "42", label: "42" },
+];
 
 const CreateProduct = () => {
   const location = useLocation();

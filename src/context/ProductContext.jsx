@@ -1,15 +1,14 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { defaultImages } from "../config/images";
-import { AllProducts } from "../config/data";
+import { AllProducts, userProfile } from "../config/data";
+import { useAuth } from "./AuthContext";
 
 const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
-  // Datos de ejemplo iniciales
-
+  const { user } = useAuth();
   const [products] = useState(AllProducts);
   const [searchResults, setSearchResults] = useState(null);
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState(user?.favorites || userProfile[0].favorites || []);
   const [loading, setLoading] = useState(false);
   const [filters, setFilters] = useState({
     category: "",
@@ -17,6 +16,11 @@ export const ProductProvider = ({ children }) => {
     price: "",
     search: "",
   });
+
+  // Actualizar favoritos cuando cambia el usuario
+  useEffect(() => {
+    setFavorites(user?.favorites || userProfile[0].favorites || []);
+  }, [user]);
 
   // Función para verificar si un producto está en el rango de precio seleccionado
   const isInPriceRange = (price, range) => {

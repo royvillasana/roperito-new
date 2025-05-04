@@ -26,18 +26,33 @@ const ProductCard = ({ product, myProducts = false }) => {
   };
 
   const handleDeleteClick = () => {
-    setShowConfirm(true); // Abre el modal de confirmación
+    setShowConfirm(true);
   };
 
   const confirmDelete = () => {
     console.log("Eliminar", product.id);
     setShowConfirm(false);
-    // Aquí luego llamas a tu API para eliminar realmente
   };
 
   const cancelDelete = () => {
     setShowConfirm(false);
   };
+
+  // Función para obtener el rating correcto
+  const getRatingInfo = () => {
+    if (myProducts && product.rating) {
+      return {
+        rating: product.rating.average,
+        total: product.rating.total
+      };
+    }
+    return {
+      rating: product.seller?.rating || 0,
+      total: product.seller?.totalRatings || 0
+    };
+  };
+
+  const ratingInfo = getRatingInfo();
 
   return (
     <Card className="h-100 product-card position-relative">
@@ -79,7 +94,7 @@ const ProductCard = ({ product, myProducts = false }) => {
         <div className="d-flex align-items-center mb-2">
           <FaStar className="text-warning me-1" />
           <span>
-            {product.seller?.rating || 0} ({product.seller?.totalRatings || 0})
+            {ratingInfo.rating} ({ratingInfo.total})
           </span>
         </div>
         <Button
