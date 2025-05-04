@@ -5,9 +5,10 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import FilterSelect from "../../components/FilterSelect/FilterSelect";
 import { AllProducts } from "../../config/data";
 import "./CreateProduct.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { CgClose } from "react-icons/cg";
+import { IoClose } from "react-icons/io5";
 
 // Extraer categorías únicas de los productos
 const CATEGORY_OPTIONS = [...new Set(AllProducts.map(product => product.category))]
@@ -28,6 +29,7 @@ const SIZE_OPTIONS = [
 
 const CreateProduct = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const productToEdit = location.state?.product || null;
 
   const {
@@ -78,7 +80,14 @@ const CreateProduct = () => {
   return (
     <div className="create-product">
       <Container className="py-5">
-        <Card className="mx-auto" style={{ maxWidth: "600px" }}>
+        <Card className="mx-auto position-relative" style={{ maxWidth: "600px" }}>
+          <button
+            className="close-button"
+            onClick={() => navigate(-1)}
+            aria-label="Cerrar"
+          >
+            <IoClose size={24} />
+          </button>
           <Card.Body className="p-4">
             <h2 className="text-center mb-4 section-title">
               {productToEdit ? "Editar publicación" : "Crear publicación"}
