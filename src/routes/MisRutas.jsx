@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CreateProduct from "../pages/CreateProduct/CreateProduct";
 import Gallery from "../pages/Gallery/Gallery";
-import ProductDetail from "../pages/ProductDetail";
+import ProductDetail from "../pages/ProductDetail/ProductDetail";
 import HowItWorks from "../pages/HowItWorks";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Auth/Login";

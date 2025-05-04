@@ -24,7 +24,7 @@ export const userProfile = [{
             title: "Chaqueta de mezclilla vintage",
             price: 19990,
             images: [defaultImages.products[0]],
-            status: "Vendido",
+            status: "vendido",
             rating: {
                 average: 4.2,
                 total: 85
@@ -35,7 +35,7 @@ export const userProfile = [{
             title: "Polera oversize negra",
             price: 5990,
             images: [defaultImages.products[1]],
-            status: "Vendido",
+            status: "vendido",
             rating: {
                 average: 4.2,
                 total: 85
@@ -81,7 +81,7 @@ export const AllProducts = [{
         size: "L",
         category: "chaquetas",
         images: [defaultImages.products[0], defaultImages.products[1]],
-        status: "disponible",
+        status: "vendido",
         seller: {
             id: "u123456",
             name: "Juan Pérez",
@@ -100,7 +100,7 @@ export const AllProducts = [{
         size: "M",
         category: "poleras",
         images: [defaultImages.products[1], defaultImages.products[2]],
-        status: "disponible",
+        status: "vendido",
         seller: {
             id: "u123456",
             name: "Juan Pérez",
